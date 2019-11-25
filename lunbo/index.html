@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css"/>
+	</head>
+	<body>
+		<div id="app">
+			{{zhi}}
+			<input :type="type"  v-bind:value="getzhi" />
+			<button @click="sayhellow" v-on:mouseout="saybye">{{country}}</button>
+			<button v-for="(n,i) in list">{{i}}</button>
+			<br />
+			
+			<img v-for="(n,i) in list1" :src="n" v-if="i==show" />
+		</div>
+		
+	</body>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!',
+				zhi:"你好啊",
+				type:"password",
+				country:"中国",
+				show:0,
+				list:["贝贝","晶晶","欢欢","迎迎","妮妮"],
+				list1:[
+					"img/00ad41a6ab087fe5b6e1ee2d7858_640_900.cj.jpg",
+					"img/0aa9febd3b2b431e4959b3df4789_640_842.cj.jpg",
+					"img/0b7a0e038d0e4133fc22a28a7d06_640_832.cg.jpg",
+					"img/0ed17bd8e90023fdb29a836a7e8b_640_919.cj.jpg"
+				]
+			},
+			methods: {
+				sayhellow() {
+					window.alert("你好")
+				},
+				saybye: function(){
+					window.alert("再见")
+				}
+			},
+            computed:{
+				getzhi:function(){
+					 return this.zhi
+				}
+			},
+			mounted:function(){
+				var ob=this;
+				window.setInterval(function(){
+					ob.show++;
+					if(ob.show>=ob.list1.length){
+						ob.show=0;
+					}
+					
+				},1000)
+			}
+		})
+	</script>
+</html>
